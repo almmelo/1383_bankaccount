@@ -4,15 +4,17 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 class BankFilesService {
     private String FileName;
 
     public void openAccountFile(String account) {
-        String caminhoDoArquivo = "conta_"+account+".txt";
-        File arquivo = new File(caminhoDoArquivo);
+        String filePath = "src/main/resources/conta_"+account+".txt";
+        File file = new File(filePath);
 
-        if (!arquivo.exists()) {
+        if (!file.exists()) {
             System.out.println("Arquivo da conta não localizado!");
             return;
         }
@@ -33,10 +35,11 @@ class BankFilesService {
     }
 
     public void openUserFile(String cpf) {
-        String caminhoDoArquivo = "user_"+cpf+".txt";
-        File arquivo = new File(caminhoDoArquivo);
 
-        if (!arquivo.exists()) {
+        String caminhoDoArquivo = "src/main/resources/user_"+cpf+".txt";
+        File file = new File(caminhoDoArquivo);
+
+        if (!file.exists()) {
             System.out.println("Arquivo de usuário não existe!");
             return;
         }
