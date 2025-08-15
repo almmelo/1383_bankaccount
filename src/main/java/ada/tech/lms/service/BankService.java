@@ -11,6 +11,7 @@ public class BankService {
 
     public void addAccount(BankAccount account) {
         accounts.add(account);
+
     }
 
     public void deposit(String accountNumber, double amount) {
@@ -27,23 +28,23 @@ public class BankService {
 
     public BankAccount findAccount(String accountNumber) {
         return accounts.stream()
-            .filter(a -> a.getAccountNumber().equals(accountNumber))
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("Account not found"));
+                .filter(a -> a.getAccountNumber().equals(accountNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Account not found"));
     }
 
-    public User findUser(String documentNumber){
-       for (BankAccount account : accounts){
-           if(account.getOwner().getCpf().equals(documentNumber)){
-               return account.getOwner();
-           }
-       }
-       throw new IllegalArgumentException("There is no owner");
+    public User findUser(String documentNumber) {
+        for (BankAccount account : accounts) {
+            if (account.getOwner().getCpf().equals(documentNumber)) {
+                return account.getOwner();
+            }
+        }
+        throw new IllegalArgumentException("There is no owner");
     }
 
     public BankAccount findAccountByUser(User user) {
-        for (BankAccount account : accounts){
-            if(account.getOwner().getCpf().equals(user.getCpf())){
+        for (BankAccount account : accounts) {
+            if (account.getOwner().getCpf().equals(user.getCpf())) {
                 return account;
             }
         }
