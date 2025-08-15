@@ -1,8 +1,23 @@
 package ada.tech.lms.persistence;
 
-import java.nio.file.Paths;
+import ada.tech.lms.domain.User;
+
+import java.io.File;
 
 public class UserPersistence {
 
-    private Paths filePath = "scr/main/respources/user_"
+    private String filePath = ;
+
+    UserPersistence(User user){
+
+        this.filePath = "scr/main/respources/user_" + user.getCpf() + ".txt";
+
+        var file = new File(filePath);
+
+        if (!file.exists()){
+            file.createNewFile();
+        }
+
+
+    }
 }
