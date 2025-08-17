@@ -24,6 +24,7 @@ public class OptionService {
 			case CREATE_ACCOUNT -> executedOption = new CreateAccountExecutedOption(bankService, scanner);
 			case DEPOSIT -> executedOption = new DepositExecutedOption(bankService, scanner, identifyAccountScreen.init(scanner));
 			case GET_BALANCE -> executedOption = new GetExecutedOption(bankService, identifyAccountScreen.init(scanner));
+			case GET_STATEMENT -> executedOption = new GetStatementExecutedOption(bankService, identifyAccountScreen.init(scanner));
 
 			default -> System.exit(0);
 		}

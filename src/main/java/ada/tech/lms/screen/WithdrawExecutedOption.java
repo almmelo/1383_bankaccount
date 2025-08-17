@@ -21,9 +21,22 @@ public class WithdrawExecutedOption implements ExecutedOption {
 	public void execute() {
 		System.out.println("Valor informado para o saque?");
 		var value = scanner.nextDouble();
+
 		BankAccount account = bankService.findAccountByUser(userAccount);
-		account.getBalance();
-		account.withdraw(value);
+		if(account == null) {
+			System.out.println("Conta não encontrada.");
+			return;
+		}
+
+		try {
+			bankService.withdraw(account.getAccountNumber(), value);
+			System.out.println("Saque de R$" + value + " realizado com sucesso.");
+		} catch (IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
+
+//		account.getBalance();
+//		account.withdraw(value);
 
 	}
 }
