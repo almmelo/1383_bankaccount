@@ -1,16 +1,18 @@
 package ada.tech.lms.domain;
 
+import ada.tech.lms.screen.TransactionOptions;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class BankTransaction {
 
     protected double amount;
-    protected BankTransaction option;
+    protected TransactionOptions option;
     protected LocalDateTime dateTime;
     protected String accountNumber;
 
-    public BankTransaction(double amount, BankTransaction option, String accountNumber) {
+    public BankTransaction(double amount, TransactionOptions option, String accountNumber) {
         this.amount = amount;
         this.option = option;
         this.dateTime = LocalDateTime.now();
