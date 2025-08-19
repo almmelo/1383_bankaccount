@@ -18,7 +18,12 @@ public class GetExecutedOption implements ExecutedOption {
 	public void execute() {
 		BankAccount account = bankService.findAccountByUser(user);
 
-		System.out.printf("Saldo na conta %s é de %.2f %n", account.getAccountNumber(),
+		if(account == null) {
+			System.out.println("Conta não encontrada.");
+			return;
+		}
+
+		System.out.printf("Saldo na conta %s é de R$%.2f %n", account.getAccountNumber(),
 				account.getBalance());
 	}
 }

@@ -1,6 +1,5 @@
 package ada.tech.lms.screen;
 
-import ada.tech.lms.domain.BankAccount;
 import ada.tech.lms.domain.User;
 import ada.tech.lms.service.BankService;
 

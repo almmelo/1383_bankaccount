@@ -20,8 +20,10 @@ public abstract class BankAccount {
     public abstract void withdraw(double amount);
     public void deposit(double amount) {
         this.balance += amount;
+
         BankTransaction transactionDeposit = new BankTransaction(amount, TransactionOptions.DEPOSIT,accountNumber);
         transactions.add(transactionDeposit);
+
     }
     public double getBalance() {
         return balance;

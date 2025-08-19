@@ -6,6 +6,7 @@ public enum ScreenOptions {
 	WITHDRAW(2, "Realizar saque na conta"),
 	DEPOSIT(3, "Realizar deposito na conta"),
 	GET_BALANCE(4,"Ver saldo"),
+	GET_STATEMENT(5, "ver extrato"),
 	NO_OPTION(0,"Sair da aplicação");
 
 	private int option;

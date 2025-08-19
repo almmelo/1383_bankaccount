@@ -8,8 +8,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class CreateAccountExecutedOption implements ExecutedOption {
-	private BankService bankService;
-	private Scanner scanner;
+	private final BankService bankService;
+	private final Scanner scanner;
 
 	public CreateAccountExecutedOption(BankService bankService, Scanner scanner) {
 		this.bankService = bankService;
@@ -23,6 +23,7 @@ public class CreateAccountExecutedOption implements ExecutedOption {
 		System.out.println("Informe o Nome do usuário");
 		var name = scanner.next();
 		var generatedAccountNumber = generateAccountNumber();
+		//informar o tipo de conta (SIMPLE OU SPECIAL) e depois fazer a distinção no addAccount().
 		bankService.addAccount(new SimpleAccount(generatedAccountNumber, new User(cpf,name), 0.0));
 		System.out.println("Conta criada com sucesso");
 	}
