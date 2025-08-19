@@ -13,6 +13,7 @@ public class BankTransaction {
     protected String accountNumber;
     protected String cpf;
 
+
     public BankTransaction(double amount, TransactionOptions option, String accountNumber, String cpf) {
         this.amount = amount;
         this.option = option;
