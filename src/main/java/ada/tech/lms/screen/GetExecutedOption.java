@@ -1,6 +1,8 @@
 package ada.tech.lms.screen;
 
 import ada.tech.lms.domain.BankAccount;
+import ada.tech.lms.domain.SimpleAccount;
+import ada.tech.lms.domain.SpecialAccount;
 import ada.tech.lms.domain.User;
 import ada.tech.lms.service.BankService;
 
@@ -25,5 +27,12 @@ public class GetExecutedOption implements ExecutedOption {
 
 		System.out.printf("Saldo na conta %s é de R$%.2f %n", account.getAccountNumber(),
 				account.getBalance());
+
+		if (account instanceof SimpleAccount) {
+			System.out.println("Conta Simples");
+		} else {
+			System.out.println("Conta Especial");
+			System.out.printf("Limite: R$%.2f %n", ((SpecialAccount) account).getLimit());
+		}
 	}
 }

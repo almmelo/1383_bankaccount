@@ -15,6 +15,7 @@ import ada.tech.lms.domain.User;
 import ada.tech.lms.screen.TransactionOptions;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -58,7 +59,7 @@ public class BankService {
 
             //salva o registro da transação
             BankTransaction transaction = new BankTransaction(amount, TransactionOptions.DEPOSIT,
-                    account.getAccountNumber(), account.getOwner().getCpf());
+                    account.getAccountNumber(), account.getOwner().getCpf(), LocalDateTime.now());
             transactionPersistence.save(transaction);
         } catch (IOException e) {
             throw new RuntimeException("Erro ao realizar o depósito.", e);
@@ -118,12 +119,23 @@ public class BankService {
             return new ArrayList<>();
         }
     }
-//    public BankAccount findAccount(String accountNumber) {
-//        return accounts.stream()
-//                .filter(a -> a.getAccountNumber().equals(accountNumber))
-//                .findFirst()
-//                .orElseThrow(() -> new IllegalArgumentException("Account not found"));
-//     }
+    /*public BankAccount findAccount(String accountNumber) {
+        return accounts.stream()
+                .filter(a -> a.getAccountNumber().equals(accountNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Account not found"));
+
+        Path caminho = Paths.get("src", "main", "resources"
+                , "conta_"+accountNumber+".txt");
+     }*/
+
+    public BankAccount findAccount(String accountNumber) {
+        try {
+            return accountPersistence.loadByNumber(accountNumber);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao carregar conta.");
+        }
+    }
 
     public User findUser(String documentNumber) {
 //        for (BankAccount account : accounts) {
@@ -176,6 +188,7 @@ public class BankService {
                 System.err.println("Usuário não encontrado ou erro ao ler o arquivo: " + e.getMessage());
                 return null;
             }
+            return (new User(cpf,"Noname"));
         }
     }
 
@@ -216,6 +229,7 @@ public class BankService {
 
     public String generateStatement(String accountNumber){
         BankAccount foundAccount = findAccount(accountNumber);
+
         String statementText = "------- EXTRATO BANCÁRIO -------\n";
         statementText += "Cliente: " + foundAccount.getOwner().getName() + "\n";
         statementText += "\nConta: " + foundAccount.getAccountNumber() + "\n";

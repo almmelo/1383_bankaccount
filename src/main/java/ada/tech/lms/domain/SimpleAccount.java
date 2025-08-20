@@ -12,9 +12,9 @@ public class SimpleAccount extends BankAccount {
     public void withdraw(double amount) {
         if (amount <= balance) {
             balance -= amount;
-            BankTransaction transactionWithDraw = new BankTransaction(amount, TransactionOptions.WITHDRAW,accountNumber);
+            BankTransaction transactionWithDraw = new BankTransaction(amount, TransactionOptions.WITHDRAW, accountNumber, getOwner().getCpf());
             transactions.add(transactionWithDraw);
-            }
+
         } else {
             throw new IllegalArgumentException("Insufficient balance.");
         }
