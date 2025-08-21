@@ -12,7 +12,7 @@ public class IdentifyAccountScreen {
 		this.bankService = bankService;
 	}
 	public User init(Scanner sc){
-		System.out.println("Informe o cpf da sua conta");
+		System.out.println("Informe o cpf da conta: ");
 		return bankService.findUser(sc.next());
 	}
 }
