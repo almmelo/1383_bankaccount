@@ -21,7 +21,7 @@ public abstract class BankAccount {
     public void deposit(double amount) {
         this.balance += amount;
 
-        BankTransaction transactionDeposit = new BankTransaction(amount, TransactionOptions.DEPOSIT,accountNumber, getOwner().getCpf());
+        BankTransaction transactionDeposit = new BankTransaction(amount, TransactionOptions.DEPOSITO,accountNumber, getOwner().getCpf());
         transactions.add(transactionDeposit);
 
     }

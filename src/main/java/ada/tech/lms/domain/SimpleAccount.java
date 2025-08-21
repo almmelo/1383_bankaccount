@@ -12,7 +12,7 @@ public class SimpleAccount extends BankAccount {
     public void withdraw(double amount) {
         if (amount <= balance) {
             balance -= amount;
-            BankTransaction transactionWithDraw = new BankTransaction(amount, TransactionOptions.WITHDRAW, accountNumber, getOwner().getCpf());
+            BankTransaction transactionWithDraw = new BankTransaction(amount, TransactionOptions.SAQUE, accountNumber, getOwner().getCpf());
             transactions.add(transactionWithDraw);
 
         } else {

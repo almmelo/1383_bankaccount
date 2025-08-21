@@ -14,7 +14,7 @@ import ada.tech.lms.service.BankService;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static ada.tech.lms.screen.TransactionOptions.DEPOSIT;
+import static ada.tech.lms.screen.TransactionOptions.DEPOSITO;
 
 public class Main {
 	public static void main(String[] args) {
@@ -58,7 +58,7 @@ public class Main {
 
 			loadTestAccount.deposit(100);
 			accountPersistence.save(loadTestAccount);
-			BankTransaction transaction = new BankTransaction(100, DEPOSIT, testAccount.getAccountNumber(), user.getCpf());
+			BankTransaction transaction = new BankTransaction(100, DEPOSITO, testAccount.getAccountNumber(), user.getCpf());
 			TransactionPersistence transactionPersistence = new TransactionPersistence();
 			System.out.println(loadTestAccount.getBalance());
 			loadTestAccount.deposit(100);

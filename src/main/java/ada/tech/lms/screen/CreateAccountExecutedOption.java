@@ -21,8 +21,10 @@ public class CreateAccountExecutedOption implements ExecutedOption {
     public void execute() {
         System.out.println("Informe o CPF");
         var cpf = scanner.next();
-        System.out.println("Informe o Nome do usuário");
-        var name = scanner.next();
+        scanner.nextLine(); //limpar o buffer do scanner
+
+        System.out.println("Informe o Nome do usuário:");
+        var name = scanner.nextLine();
         //scanner.nextLine(); //limpar o buffer do scanner
 
         var generatedAccountNumber = generateAccountNumber();
@@ -44,7 +46,7 @@ public class CreateAccountExecutedOption implements ExecutedOption {
             bankService.addAccount(new SpecialAccount(generatedAccountNumber, new User(cpf, name), 0.0, limit));
         }
 
-        System.out.println("Conta criada com sucesso");
+        System.out.println("Conta criada com sucesso.");
     }
 
     private String generateAccountNumber() {

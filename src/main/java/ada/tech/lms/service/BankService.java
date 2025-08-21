@@ -13,7 +13,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -27,8 +26,9 @@ public class BankService {
     private final TransactionPersistence transactionPersistence = new TransactionPersistence();
     private List<BankAccount> accounts = new ArrayList<>();
 
+
     public void addAccount(BankAccount account) {
-        //accounts.add(account);
+
         try {
             User user = account.getOwner();
             userPersistence.save(user);
@@ -41,8 +41,7 @@ public class BankService {
             writer.write("");
             writer.close();
 
-
-    } catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Erro ao salvar a conta: ", e);
         }
     }
@@ -63,7 +62,7 @@ public class BankService {
             accountPersistence.save(account);
 
             //salva o registro da transação
-            BankTransaction transaction = new BankTransaction(amount, TransactionOptions.DEPOSIT,
+            BankTransaction transaction = new BankTransaction(amount, TransactionOptions.DEPOSITO,
                     account.getAccountNumber(), account.getOwner().getCpf(), LocalDateTime.now());
             transactionPersistence.save(transaction);
         } catch (IOException e) {
@@ -85,7 +84,7 @@ public class BankService {
 
             accountPersistence.save(account);
 
-            BankTransaction transaction = new BankTransaction(amount, TransactionOptions.WITHDRAW,
+            BankTransaction transaction = new BankTransaction(amount, TransactionOptions.SAQUE,
                     account.getAccountNumber(), account.getOwner().getCpf());
             transactionPersistence.save(transaction);
         } catch (IOException e) {

@@ -18,7 +18,7 @@ public class DepositExecutedOption implements ExecutedOption {
 
 	@Override
 	public void execute() {
-		System.out.println("Qual o valor que deseja depositar?");
+		System.out.println("Qual o valor que deseja depositar? ");
 		var value = scanner.nextDouble();
 
 		//bankService.findAccountByUser(user).deposit(value);
@@ -29,6 +29,6 @@ public class DepositExecutedOption implements ExecutedOption {
 		}
 
 		bankService.deposit(account.getAccountNumber(), value);
-		System.out.println("Deposito de R$" + value + " realizado com sucesso.");
+		System.out.println("Deposito de R$ " + value + " realizado com sucesso.");
 	}
 }

@@ -8,35 +8,34 @@ import java.util.Scanner;
 
 public class WithdrawExecutedOption implements ExecutedOption {
 
-	private BankService bankService;
-	private Scanner scanner;
-	private User userAccount;
-	public WithdrawExecutedOption(BankService bankService, Scanner scanner, User userAccount) {
-		this.bankService = bankService;
-		this.userAccount = userAccount;
-		this.scanner = scanner;
-	}
+    private BankService bankService;
+    private Scanner scanner;
+    private User userAccount;
 
-	@Override
-	public void execute() {
-		System.out.println("Valor informado para o saque?");
-		var value = scanner.nextDouble();
+    public WithdrawExecutedOption(BankService bankService, Scanner scanner, User userAccount) {
+        this.bankService = bankService;
+        this.userAccount = userAccount;
+        this.scanner = scanner;
+    }
 
-		BankAccount account = bankService.findAccountByUser(userAccount);
-		if(account == null) {
-			System.out.println("Conta não encontrada.");
-			return;
-		}
+    @Override
+    public void execute() {
+        System.out.println("Valor informado para o saque?");
+        var value = scanner.nextDouble();
 
-		try {
-			bankService.withdraw(account.getAccountNumber(), value);
-			System.out.println("Saque de R$" + value + " realizado com sucesso.");
-		} catch (IllegalArgumentException e) {
-			System.err.println(e.getMessage());
-		}
+        BankAccount account = bankService.findAccountByUser(userAccount);
+        if (account == null) {
+            System.out.println("Conta não encontrada.");
+            return;
+        }
 
-//		account.getBalance();
-//		account.withdraw(value);
+        try {
+            bankService.withdraw(account.getAccountNumber(), value);
+            System.out.println("Saque de R$ " + value + " realizado com sucesso.");
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
 
-	}
+
+    }
 }
