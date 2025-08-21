@@ -16,7 +16,7 @@ public class SimpleAccount extends BankAccount {
             transactions.add(transactionWithDraw);
 
         } else {
-            throw new IllegalArgumentException("Insufficient balance.");
+            throw new IllegalArgumentException("Saldo insuficiente.");
         }
     }
 }

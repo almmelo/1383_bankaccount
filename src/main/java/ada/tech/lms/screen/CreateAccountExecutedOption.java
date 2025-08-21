@@ -23,6 +23,8 @@ public class CreateAccountExecutedOption implements ExecutedOption {
         var cpf = scanner.next();
         System.out.println("Informe o Nome do usuário");
         var name = scanner.next();
+        //scanner.nextLine(); //limpar o buffer do scanner
+
         var generatedAccountNumber = generateAccountNumber();
         //informar o tipo de conta (SIMPLE OU SPECIAL) e depois fazer a distinção no addAccount().
 

@@ -33,6 +33,7 @@ public class BankService {
             User user = account.getOwner();
             userPersistence.save(user);
             accountPersistence.save(account);
+
             //melhorar esse POG
             Path path = Paths.get("src", "main", "java", "ada", "tech", "lms", "resources",
                     "transactions", "transacoes_" + user.getCpf() + ".txt");

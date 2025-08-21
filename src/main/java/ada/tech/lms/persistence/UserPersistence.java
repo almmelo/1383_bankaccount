@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.Locale;
 
 public class UserPersistence {
 
@@ -51,7 +50,7 @@ public class UserPersistence {
         try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
             writer.write(formatUser(user));
             //writer.newLine();
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException("Erro ao salvar usuário.", e);
         }
     }
@@ -59,13 +58,13 @@ public class UserPersistence {
     public User load(String cpf) throws IOException {
         Path filePath = getPath(cpf);
 
-        if(!Files.exists(filePath)) {
+        if (!Files.exists(filePath)) {
             return null;
         }
 
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
             String line = reader.readLine();
-            if(line != null) {
+            if (line != null) {
                 return parseUser(line);
             }
         } catch (IOException e) {
@@ -74,33 +73,14 @@ public class UserPersistence {
         return null;
     }
 
-//    public List<User> getAll(){
-//        List<User> users = new ArrayList<>();
-//        try(BufferedReader reader = Files.newBufferedReader(filePath)){
-//            String linha;
-//
-//            while((linha= reader.readLine()) != null){
-//                users.add(converter(linha));
-//
-//            }
-//        }catch (IOException ioException){
-//            throw new RuntimeException();
-//        }
-//        return users;
-//    }
 
     private User parseUser(String line) {
         String[] parts = line.split(";");
-        if(parts.length == 2) {
+        if (parts.length == 2) {
             return new User(parts[0], parts[1]);
         }
         throw new IllegalArgumentException("Formato de usuário inválido no arquivo.");
 
-//        List<String> strings = Arrays.asList(linha.split(";"));
-//        Iterator<String> iterator = strings.iterator();
-//
-//        var user = new User(iterator.next(), iterator.next());
-//
-//        return user;
+
     }
 }
