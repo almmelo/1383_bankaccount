@@ -56,11 +56,6 @@ public class BankTransaction {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String strDataHora = dateTime.format(formatter);
 
-//        return "\'" + accountNumber + '\'' +
-//                " \' " + option + '\'' +
-//                " \' " + amount + '\'' +
-//                " \' " + strDataHora +'\'';
-
         return strDataHora + " | " + option + " | R$" + amount;
     }
 }

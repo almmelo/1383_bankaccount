@@ -17,9 +17,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class TransactionPersistence {
-    private Path filePath;
 
-    private Path getPath(String cpf) throws IOException {
+    private Path getPath(String cpf){
         Path path = Paths.get("src", "main", "java", "ada", "tech", "lms", "resources",
                 "transactions", "transacoes_" + cpf + ".txt");
 
@@ -29,7 +28,7 @@ public class TransactionPersistence {
                 Files.createFile(path);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Não foi possível criar o arquivo.", e);
+            throw new RuntimeException("Não foi possível criar o arquivo:", e);
         }
 
         return path;
