@@ -33,23 +33,22 @@ public class BankService {
             User user = account.getOwner();
             userPersistence.save(user);
             accountPersistence.save(account);
+            transactionPersistence.createEmpty(user.getCpf());
             //melhorar esse POG
-            Path path = Paths.get("src", "main", "java", "ada", "tech", "lms", "resources",
-                    "transactions", "transacoes_" + user.getCpf() + ".txt");
-            BufferedWriter writer = Files.newBufferedWriter(path);
-            writer.write("");
-            writer.close();
+//            Path path = Paths.get("src", "main", "java", "ada", "tech", "lms", "resources",
+//                    "transactions", "transacoes_" + user.getCpf() + ".txt");
+//            BufferedWriter writer = Files.newBufferedWriter(path);
+//            writer.write("");
+//            writer.close();
 
-
-    } catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Erro ao salvar a conta: ", e);
         }
     }
 
     public void deposit(String accountNumber, double amount) {
-        //findAccount(accountNumber).deposit(amount);
         try {
-            BankAccount account = accountPersistence.loadByNumber(accountNumber);
+            BankAccount account = findAccount(accountNumber);
 
             if (account == null) {
                 System.out.println("Conta não encontrada.");
@@ -71,9 +70,8 @@ public class BankService {
     }
 
     public void withdraw(String accountNumber, double amount) {
-        //findAccount(accountNumber).withdraw(amount);
         try {
-            BankAccount account = accountPersistence.loadByNumber(accountNumber);
+            BankAccount account = findAccount(accountNumber);
 
             if (account == null) {
                 System.out.println("Conta não encontrada.");
@@ -87,23 +85,15 @@ public class BankService {
             BankTransaction transaction = new BankTransaction(amount, TransactionOptions.WITHDRAW,
                     account.getAccountNumber(), account.getOwner().getCpf());
             transactionPersistence.save(transaction);
-        } catch (IOException e) {
+        } catch (IOException | IllegalArgumentException e) {
             throw new RuntimeException("Erro ao realizar o saque.", e);
         }
     }
 
     public double checkBalance(String accountNumber) {
-        //return findAccount(accountNumber).getBalance();
         try {
-            BankAccount account = accountPersistence.loadByNumber(accountNumber);
-
-            if (account == null) {
-                System.out.println("Conta não encontrada.");
-                return 0.0;
-            }
-
-            return account.getBalance();
-        } catch (IOException e) {
+            return findAccount(accountNumber).getBalance();
+        } catch (RuntimeException e) {
             throw new RuntimeException("Erro ao carregar saldo.", e);
         }
     }
@@ -123,6 +113,7 @@ public class BankService {
             return new ArrayList<>();
         }
     }
+
     /*public BankAccount findAccount(String accountNumber) {
         return accounts.stream()
                 .filter(a -> a.getAccountNumber().equals(accountNumber))
@@ -166,8 +157,9 @@ public class BankService {
         try {
             return accountPersistence.load(user.getCpf());
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao carregar conta.", e);
+            System.err.println("Erro ao carregar conta. " + e);
         }
+        return null;
 
     }
 

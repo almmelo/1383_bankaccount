@@ -35,6 +35,15 @@ public class TransactionPersistence {
         return path;
     }
 
+    public void createEmpty(String cpf) throws IOException{
+        Path path = getPath(cpf);
+        if(!Files.exists(path)) {
+            Files.createFile(path);
+        } else {
+            Files.write(path, new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
+        }
+    }
+
     public void save(BankTransaction transaction) throws IOException {
         Path filePath = getPath(transaction.getCpf());
 

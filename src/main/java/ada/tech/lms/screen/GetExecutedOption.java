@@ -26,7 +26,7 @@ public class GetExecutedOption implements ExecutedOption {
 		}
 
 		System.out.printf("Saldo na conta %s é de R$%.2f %n", account.getAccountNumber(),
-				account.getBalance());
+				bankService.checkBalance(account.getAccountNumber()));
 
 		if (account instanceof SimpleAccount) {
 			System.out.println("Conta Simples");
