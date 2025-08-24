@@ -21,14 +21,18 @@ public class CreateAccountExecutedOption implements ExecutedOption {
     public void execute() {
         System.out.println("Informe o CPF");
         var cpf = scanner.next();
-        scanner.nextLine();
+        scanner.nextLine(); //limpar o buffer do scanner
 
-        System.out.println("Informe o Nome do usuário");
+        System.out.println("Informe o Nome do usuário:");
         var name = scanner.nextLine();
-        var generatedAccountNumber = generateAccountNumber();
+        //scanner.nextLine(); //limpar o buffer do scanner
 
+        var generatedAccountNumber = generateAccountNumber();
+        //informar o tipo de conta (SIMPLE OU SPECIAL) e depois fazer a distinção no addAccount().
+
+        int tipoConta = 1;
         System.out.println("Informe o tipo de conta: 1 - Simples, 2 - Especial");
-        int tipoConta = scanner.nextInt();
+        tipoConta = scanner.nextInt();
         if (tipoConta != 1 && tipoConta != 2) {
             System.out.println("Tipo de Conta inválido. Conta não criada.");
             return;
@@ -36,6 +40,7 @@ public class CreateAccountExecutedOption implements ExecutedOption {
         if (tipoConta == 1) {
             bankService.addAccount(new SimpleAccount(generatedAccountNumber, new User(cpf, name), 0.0));
         } else {
+
             System.out.println("Informe o valor do Limite: ");
             var limit = scanner.nextDouble();
             bankService.addAccount(new SpecialAccount(generatedAccountNumber, new User(cpf, name), 0.0, limit));
