@@ -34,5 +34,5 @@ public abstract class BankAccount {
     public User getOwner() {
         return owner;
     }
-    public List<BankTransaction> getTransactions() { return transactions; }
+    //public List<BankTransaction> getTransactions() { return transactions; }
 }

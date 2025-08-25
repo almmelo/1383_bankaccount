@@ -25,14 +25,14 @@ public class GetExecutedOption implements ExecutedOption {
 			return;
 		}
 
-		System.out.printf("Conta: %s %nSaldo: R$ %.2f %n", account.getAccountNumber(),
-				account.getBalance());
+		System.out.printf("Saldo na conta %s é de R$%.2f %n", account.getAccountNumber(),
+				bankService.checkBalance(account.getAccountNumber()));
 
 		if (account instanceof SimpleAccount) {
 			System.out.println("Conta Simples");
 		} else {
 			System.out.println("Conta Especial");
-			System.out.printf("Limite: R$ %.2f %n", ((SpecialAccount) account).getLimit());
+			System.out.printf("Limite: R$%.2f %n", ((SpecialAccount) account).getLimit());
 		}
 	}
 }

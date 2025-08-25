@@ -12,7 +12,7 @@ public enum ScreenOptions {
     private int option;
     private String optionDescription;
 
-    private ScreenOptions(int option, String optionDescription) {
+    ScreenOptions(int option, String optionDescription) {
         this.option = option;
         this.optionDescription = optionDescription;
     }

@@ -9,24 +9,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.Optional;
 
 public class UserPersistence {
 
-    private Path filePath;
-
-//    public UserPersistence(User user) {
-//        try {
-//            this.filePath = getPath(user.getCpf());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
-
-
     private Path getPath(String cpf) throws IOException {
         Path path = Paths.get("src", "main", "java", "ada", "tech", "lms", "resources", "users", "usuario_" + cpf + ".txt");
-        //System.out.println("Caminho absoluto que o programa está tentando usar: " + path.toAbsolutePath());
         try {
             Files.createDirectories(path.getParent());
             if (!Files.exists(path)) {
@@ -55,22 +43,22 @@ public class UserPersistence {
         }
     }
 
-    public User load(String cpf) throws IOException {
+    public Optional<User> load(String cpf) throws IOException {
         Path filePath = getPath(cpf);
 
-        if (!Files.exists(filePath)) {
-            return null;
+        if(!Files.exists(filePath)) {
+            return Optional.empty();
         }
 
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
             String line = reader.readLine();
-            if (line != null) {
-                return parseUser(line);
+            if(line != null) {
+                return Optional.of(parseUser(line));
             }
         } catch (IOException e) {
             throw new RuntimeException("Erro ao carregar usuário.", e);
         }
-        return null;
+        return Optional.empty();
     }
 
 

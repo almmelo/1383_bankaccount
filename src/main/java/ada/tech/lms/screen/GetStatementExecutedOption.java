@@ -1,12 +1,8 @@
 package ada.tech.lms.screen;
 
 import ada.tech.lms.domain.BankAccount;
-import ada.tech.lms.domain.BankTransaction;
 import ada.tech.lms.domain.User;
 import ada.tech.lms.service.BankService;
-
-import java.util.List;
-
 
 public class GetStatementExecutedOption implements ExecutedOption{
     private final BankService bankService;
@@ -20,20 +16,14 @@ public class GetStatementExecutedOption implements ExecutedOption{
 
     @Override
     public void execute() {
-        List<BankTransaction> transactions = bankService.getTransactions(user.getCpf());
         BankAccount account = bankService.findAccountByUser(user);
 
-        if(transactions.isEmpty()) {
-            System.out.println("Nenhuma transação encontrada para a conta "
-                    + account.getAccountNumber());
+        if(account == null) {
+            System.out.println("Conta não encontrada.");
             return;
         }
 
-        System.out.println("Extrato da conta " + account.getAccountNumber()
-                + " - Usuário: " + account.getOwner().getName());
-
-        for(BankTransaction t : transactions) {
-            System.out.println(t.toString());
-        }
+        String statement = bankService.generateStatement(account.getAccountNumber());
+        System.out.println(statement);
     }
 }

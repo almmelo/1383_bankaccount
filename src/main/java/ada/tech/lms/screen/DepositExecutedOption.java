@@ -4,6 +4,7 @@ import ada.tech.lms.domain.BankAccount;
 import ada.tech.lms.domain.User;
 import ada.tech.lms.service.BankService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DepositExecutedOption implements ExecutedOption {
@@ -18,17 +19,20 @@ public class DepositExecutedOption implements ExecutedOption {
 
 	@Override
 	public void execute() {
-		System.out.println("Qual o valor que deseja depositar? ");
-		var value = scanner.nextDouble();
+		try {
+			System.out.println("Qual o valor que deseja depositar?");
+			var value = scanner.nextDouble();
 
-		//bankService.findAccountByUser(user).deposit(value);
-		BankAccount account = bankService.findAccountByUser(user);
-		if(account == null) {
-			System.out.println("Conta não encontrada.");
-			return;
+			BankAccount account = bankService.findAccountByUser(user);
+			if (account == null) {
+				System.out.println("Conta não encontrada.");
+				return;
+			}
+
+			bankService.deposit(account.getAccountNumber(), value);
+			System.out.printf("Deposito de R$%.2f realizado com sucesso.\n", value);
+		} catch (IllegalArgumentException | InputMismatchException e) {
+			System.err.println("Erro ao realizar o depósito. Por favor, informe um valor válido.");
 		}
-
-		bankService.deposit(account.getAccountNumber(), value);
-		System.out.println("Deposito de R$ " + value + " realizado com sucesso.");
 	}
 }
