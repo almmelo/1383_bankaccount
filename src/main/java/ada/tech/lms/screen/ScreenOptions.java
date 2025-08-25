@@ -9,8 +9,8 @@ public enum ScreenOptions {
     GET_STATEMENT(5, "ver extrato"),
     NO_OPTION(0, "Sair da aplicação");
 
-    private int option;
-    private String optionDescription;
+    private final int option;
+    private final String optionDescription;
 
     ScreenOptions(int option, String optionDescription) {
         this.option = option;

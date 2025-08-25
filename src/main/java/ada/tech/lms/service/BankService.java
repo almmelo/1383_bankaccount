@@ -69,8 +69,6 @@ public class BankService {
             transactionPersistence.save(transaction);
         } catch (IOException e) {
             throw new RuntimeException("Erro ao realizar o saque.", e);
-        } catch (IllegalArgumentException e) {
-            throw e;
         }
     }
 

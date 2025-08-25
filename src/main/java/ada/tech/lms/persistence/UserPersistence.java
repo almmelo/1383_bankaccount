@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class UserPersistence {
 
-    private Path getPath(String cpf) throws IOException {
+    private Path getPath(String cpf) {
         Path path = Paths.get("src", "main", "java", "ada", "tech", "lms", "resources", "users", "usuario_" + cpf + ".txt");
         try {
             Files.createDirectories(path.getParent());
